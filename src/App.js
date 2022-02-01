@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Navbar/>
-      <ItemListContainer/>
+      <ItemListContainer Greeting={"Lista de Compras"}/>
     </>
   );
 }
