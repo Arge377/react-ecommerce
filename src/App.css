@@ -1,7 +1,30 @@
 .itemListContainer{
   justify-content: center;
   display: flex;
-  padding-top: 40px;
+  padding-top: 60px;
+}
+.cardContainer{
+  display: flex;
+  justify-content: center;
+}
+
+.card-header{
+  background-color: transparent;
+}
+
+.card{
+  box-shadow: 3px 3px 10px #8080806b;
+  border: none;
+  width: 18rem;
+}
+
+.count{
+  text-align: center;
+  background-color: transparent !important;
+}
+
+.add-btn{
+  width: 16rem;
 }
 
 .navbar {
