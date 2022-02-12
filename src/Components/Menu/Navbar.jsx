@@ -1,15 +1,14 @@
 import React from "react";
-import logo from '../../img/logo192.png';
+import logo from '../../img/logo512.png';
 import CartShopIcon from '../../img/cart_purchase_shopping.png'
 import NavBrand from "./NavBrand";
 import NavItem from "./NavItem";
 import NavToggler from "./NavToggler";
 import CartWidget from "./CartWidget";
 
-
 function Navbar(){
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="mb-4 navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
                 <NavBrand ImgSrc={logo} Width={"24"} Height={"24"} Href={"/#"}/>
                 <NavToggler/>
