@@ -1,12 +1,11 @@
 import './App.css';
-import ItemDetailContainer from './Components/itemDetailContainer/ItemDetailContainer'
-import Navbar from './Components/Menu/Navbar'
+import Navbar from './Components/Menu/Navbar';
+import Rutas from './Routes';
 
 function App() {
   return (
     <>
-      <Navbar/>
-      <ItemDetailContainer/>
+      <Rutas/>
     </>
   );
 }

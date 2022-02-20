@@ -16,21 +16,20 @@ const ItemCount = ({stock, initial, name}) => {
   }
 
   function onAdd(){
-    window.alert(`Agregaste ${count} ${name} al carrito de compras`);
   }
 
   return (
     <>
       <div className="input-group mb-3">
-        <button className="btn btn-outline-primary" type="button" onClick={decrement}>
+        <button className="btn btn-outline-success" type="button" onClick={decrement}>
           <span className="fa fa-minus"></span>
-          </button>
+        </button>
         <input type="number" className="form-control count" value={count} disabled/>
-        <button className="btn btn-outline-primary" type="button" onClick={increment}>
+        <button className="btn btn-outline-success" type="button" onClick={increment}>
           <span className="fa fa-plus"></span>
         </button>
       </div>
-      <a href='/#' className="btn btn-outline-primary add-btn" onClick={onAdd}>Agregar al Carrito</a>
+      <button className="btn btn-outline-success add-btn" onClick={onAdd}>Add to cart</button>
     </>
   )};
 

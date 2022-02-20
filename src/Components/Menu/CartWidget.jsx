@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export const CartWidget = ({Icon, Href, Width, Height}) => {
+export const CartWidget = () => {
   return (
     <div className="d-flex">
-      <a className="shopIcon" href={Href}>
-        <img src={Icon} alt="" width={Width} height={Height}/>
-      </a>
+      <Link className="shopIcon" to='/cart'>
+        <i className="fa-solid fa-cart-shopping"></i>
+      </Link>
     </div>
 )};
 

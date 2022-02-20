@@ -1,20 +1,24 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Item = ({funko}) => {
+const Item = ({book}) => {
+
+var sectionStyle = {
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundImage: `url(${book.img})`
+};
 
   return (
     <>
-        <div className='col-md-3 mb-5 d-flex justify-content-center'>
-            <div className="card text-center">
-                <div className="card-header">
-                    <h6 className="card-title">{funko.name} - {funko.id}</h6>
+        <div className='col-md-2 mb-5 d-flex justify-content-center'>
+            <div className="card card-list text-center">
+                <div className="card-body" style={sectionStyle}>  
                 </div>
-                <div className="card-body">
-                    <img className='mt-2 card-img card-img-top' src={funko.img} alt="" />             
-                    <p className="card-text text-center mt-2">{funko.currency}{funko.price}</p>
-                </div>
-                <div className="card-footer text-muted d-grid gap-2">
-                    <a href="/#" className="btn btn-outline-success">Detail</a>
+                <div className="card-footer d-grid">
+                    <p className="card-list-title">{book.name}</p>           
+                    <p className="card-list-price text-center">{book.currency}{book.price}</p>
+                    <Link to={`/book/${book.id}`} className="btn btn-outline-success">Detail</Link>
                 </div>
             </div>
         </div>
