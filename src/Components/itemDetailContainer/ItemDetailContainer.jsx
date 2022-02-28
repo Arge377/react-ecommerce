@@ -1,23 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import ItemDetail from './ItemDetail';
-import HarryPotter1 from '../../img/Books/HarryPotter/piedra_filosofal.jpg';
-import HarryPotter2 from '../../img/Books/HarryPotter/camara_secreta.jpg';
-import HarryPotter3 from '../../img/Books/HarryPotter/prisionero_de_azkaban.jpg';
-import HarryPotter4 from '../../img/Books/HarryPotter/caliz_de_fuego.jpg';
-import HarryPotter5 from '../../img/Books/HarryPotter/orden_del_fenix.jpg';
-import HarryPotter6 from '../../img/Books/HarryPotter/misterio_del_principe.jpg';
-import HarryPotter7 from '../../img/Books/HarryPotter/reliquias_de_la_muerte.jpg';
-import Narnia1 from '../../img/Books/Narnia/el-leon-la-bruja-y-el-armario.jpg';
-import Narnia2 from '../../img/Books/Narnia/el-principe-caspian.jpg';
-import Narnia3 from '../../img/Books/Narnia/viajero-del-alba.jpg';
-import Narnia4 from '../../img/Books/Narnia/silla-de-plata.jpg';
-import Narnia5 from '../../img/Books/Narnia/el-caballo-y-el-muchacho.jpg';
-import Narnia6 from '../../img/Books/Narnia/el-sobrino-del-mago.jpg';
-import Narnia7 from '../../img/Books/Narnia/la-ultima-batalla.jpg';
-import HungerGames1 from '../../img/Books/HungerGames/juegos_del_hambre.jpg';
-import HungerGames2 from '../../img/Books/HungerGames/en_llamas.jpg';
-import HungerGames3 from '../../img/Books/HungerGames/Sinsajo.jpg';
-import HungerGames4 from '../../img/Books/HungerGames/pajaros_y_serpientes.jpg';
+import {HarryPotter1, HarryPotter2, HarryPotter3, HarryPotter4, HarryPotter5, HarryPotter6, HarryPotter7} from '../../img/Books/HarryPotter';
+import {Narnia1, Narnia2, Narnia3, Narnia4, Narnia5, Narnia6, Narnia7} from '../../img/Books/Narnia';
+import {HungerGames1, HungerGames2, HungerGames3, HungerGames4} from '../../img/Books/HungerGames';
 import { useParams } from 'react-router-dom'
 
 
@@ -36,7 +21,8 @@ const DbBooks = [
     writer: "Rowling, J. K.",
     category: categories.fantasia,
     price: 2300,
-    currency: "$"
+    currency: "$",
+    stock: 5
   },
   {
     id : "02",
@@ -46,7 +32,8 @@ const DbBooks = [
     category: categories.fantasia,
     img: HarryPotter2,
     price: 2300,
-    currency: "$"
+    currency: "$",
+    stock: 7
   },
   {
     id : "03",
@@ -56,7 +43,8 @@ const DbBooks = [
     category: categories.fantasia,
     img: HarryPotter3,
     price: 2300,
-    currency: "$"
+    currency: "$",
+    stock: 3
   },
   {
     id : "04",
@@ -66,7 +54,8 @@ const DbBooks = [
     category: categories.fantasia,
     img: HarryPotter4,
     price: 3900,
-    currency: "$"
+    currency: "$",
+    stock: 2
   },
   {
     id : "05",
@@ -76,7 +65,8 @@ const DbBooks = [
     category: categories.fantasia,
     img: HarryPotter5,
     price: 4500,
-    currency: "$"
+    currency: "$",
+    stock: 8
   },
   {
     id : "06",
@@ -86,7 +76,8 @@ const DbBooks = [
     category: categories.fantasia,
     img: HarryPotter6,
     price: 2900,
-    currency: "$"
+    currency: "$",
+    stock: 4
   },
   {
     id : "07",
@@ -96,7 +87,8 @@ const DbBooks = [
     category: categories.fantasia,
     img: HarryPotter7,
     price: 3900,
-    currency: "$"
+    currency: "$",
+    stock: 5
   },
   {
     id : "08",
@@ -106,7 +98,8 @@ const DbBooks = [
     category: categories.infantil,
     img: Narnia1,
     price: 2100,
-    currency: "$"
+    currency: "$",
+    stock: 1
   },
   {
     id : "09",
@@ -116,7 +109,8 @@ const DbBooks = [
     category: categories.infantil,
     img: Narnia2,
     price: 2200,
-    currency: "$"
+    currency: "$",
+    stock: 10
   },
   {
     id : "10",
@@ -126,7 +120,8 @@ const DbBooks = [
     writer: "C. S. Lewis",
     category: categories.infantil,
     price: 1500,
-    currency: "$"
+    currency: "$",
+    stock: 3
   },
   {
     id : "11",
@@ -136,7 +131,8 @@ const DbBooks = [
     category: categories.infantil,
     img: Narnia4,
     price: 2500,
-    currency: "$"
+    currency: "$",
+    stock: 2
   },
   {
     id : "12",
@@ -146,7 +142,8 @@ const DbBooks = [
     category: categories.infantil,
     img: Narnia5,
     price: 2200,
-    currency: "$"
+    currency: "$",
+    stock: 3
   },
   {
     id : "13",
@@ -156,7 +153,8 @@ const DbBooks = [
     category: categories.infantil,
     img: Narnia6,
     price: 2100,
-    currency: "$"
+    currency: "$",
+    stock: 15
   },
   {
     id : "14",
@@ -166,7 +164,8 @@ const DbBooks = [
     category: categories.infantil,
     img: Narnia7,
     price: 2500,
-    currency: "$"
+    currency: "$",
+    stock: 5
   },
   {
     id : "15",
@@ -176,7 +175,8 @@ const DbBooks = [
     category: categories.accion,
     img: HungerGames1,
     price: 1900,
-    currency: "$"
+    currency: "$",
+    stock: 2
   },
   {
     id : "16",
@@ -186,7 +186,8 @@ const DbBooks = [
     category: categories.accion,
     img: HungerGames2,
     price: 2000,
-    currency: "$"
+    currency: "$",
+    stock: 4
   },
   {
     id : "17",
@@ -196,7 +197,8 @@ const DbBooks = [
     category: categories.accion,
     img: HungerGames3,
     price: 2000,
-    currency: "$"
+    currency: "$",
+    stock: 6
   },
   {
     id : "18",
@@ -206,7 +208,8 @@ const DbBooks = [
     category: categories.accion,
     img: HungerGames4,
     price: 2100,
-    currency: "$"
+    currency: "$",
+    stock: 9
   },
 ]
 

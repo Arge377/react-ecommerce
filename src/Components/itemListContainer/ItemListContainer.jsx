@@ -1,23 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import ItemList from './ItemList';
-import HarryPotter1 from '../../img/Books/HarryPotter/piedra_filosofal.jpg';
-import HarryPotter2 from '../../img/Books/HarryPotter/camara_secreta.jpg';
-import HarryPotter3 from '../../img/Books/HarryPotter/prisionero_de_azkaban.jpg';
-import HarryPotter4 from '../../img/Books/HarryPotter/caliz_de_fuego.jpg';
-import HarryPotter5 from '../../img/Books/HarryPotter/orden_del_fenix.jpg';
-import HarryPotter6 from '../../img/Books/HarryPotter/misterio_del_principe.jpg';
-import HarryPotter7 from '../../img/Books/HarryPotter/reliquias_de_la_muerte.jpg';
-import Narnia1 from '../../img/Books/Narnia/el-leon-la-bruja-y-el-armario.jpg';
-import Narnia2 from '../../img/Books/Narnia/el-principe-caspian.jpg';
-import Narnia3 from '../../img/Books/Narnia/viajero-del-alba.jpg';
-import Narnia4 from '../../img/Books/Narnia/silla-de-plata.jpg';
-import Narnia5 from '../../img/Books/Narnia/el-caballo-y-el-muchacho.jpg';
-import Narnia6 from '../../img/Books/Narnia/el-sobrino-del-mago.jpg';
-import Narnia7 from '../../img/Books/Narnia/la-ultima-batalla.jpg';
-import HungerGames1 from '../../img/Books/HungerGames/juegos_del_hambre.jpg';
-import HungerGames2 from '../../img/Books/HungerGames/en_llamas.jpg';
-import HungerGames3 from '../../img/Books/HungerGames/Sinsajo.jpg';
-import HungerGames4 from '../../img/Books/HungerGames/pajaros_y_serpientes.jpg';
+import {HarryPotter1, HarryPotter2, HarryPotter3, HarryPotter4, HarryPotter5, HarryPotter6, HarryPotter7} from '../../img/Books/HarryPotter';
+import {Narnia1, Narnia2, Narnia3, Narnia4, Narnia5, Narnia6, Narnia7} from '../../img/Books/Narnia';
+import {HungerGames1, HungerGames2, HungerGames3, HungerGames4} from '../../img/Books/HungerGames';
 import { useParams } from 'react-router-dom';
 
 const categories = {
