@@ -4,6 +4,7 @@ import {HarryPotter1, HarryPotter2, HarryPotter3, HarryPotter4, HarryPotter5, Ha
 import {Narnia1, Narnia2, Narnia3, Narnia4, Narnia5, Narnia6, Narnia7} from '../../img/Books/Narnia';
 import {HungerGames1, HungerGames2, HungerGames3, HungerGames4} from '../../img/Books/HungerGames';
 import { useParams } from 'react-router-dom';
+import Loader from '../loader/Loader';
 
 const categories = {
   infantil: 'Infantil',
@@ -212,15 +213,19 @@ function GetAll(category){
 }
 
 const ItemListContainer = ({Greeting}) => {
+
   let { category } = useParams();
+
   const [books, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect( () => {
     let getAllBooks = GetAll(category);
 
     getAllBooks
       .then( (books) => {
-        setItems(books) 
+        setItems(books);
+        setIsLoading(false);
       })
       .catch( (error) => { console.error(error) });
     },
@@ -229,7 +234,11 @@ const ItemListContainer = ({Greeting}) => {
 
   return (
     <>
-      <ItemList books={books}/>
+      {
+        isLoading
+        ? (<Loader/>)
+        :  <ItemList books={books}/> 
+      }
     </>
   )};
 

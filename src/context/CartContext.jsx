@@ -27,7 +27,7 @@ export const CartContextProvider = ({ children }) => {
 
     function removeItem(id){
         if(isInCart(id)){
-            let item = itemsInCart.find((item) => { return item.id === id });
+            let items = itemsInCart.filter((item) => { return item.id !== id });
 
             swal({
                 title: "Estas seguro?",
@@ -38,8 +38,8 @@ export const CartContextProvider = ({ children }) => {
               })
             .then((willDelete) => {
                 if (willDelete){
-                    itemsInCart.remove(item);
-                    swal(`${item.name} se ha eliminado con exito`, { icon: "success" });
+                    setItemsInCart(items);
+                    swal('se ha eliminado con exito', { icon: "success" });
 
                     if(itemsInCart.length <= 0)
                         <Navigate to="/"/>
@@ -50,10 +50,8 @@ export const CartContextProvider = ({ children }) => {
 
     function clearItems(){
         if(itemsInCart.length > 0){
-            let items = [];
-
             swal({
-                title: "Estas seguro?",
+                title: "Eliminar Todos",
                 text: "Una vez eliminados no podras recuperarlos",
                 icon: "warning",
                 buttons: true,
@@ -61,7 +59,7 @@ export const CartContextProvider = ({ children }) => {
               })
             .then((willDelete) => {
                 if (willDelete){
-                    setItemsInCart(items);
+                    setItemsInCart([]);
                     swal("se han eliminado todos los libros del carrito con exito", { icon: "success" });
                     <Navigate to="/"/>
                 }
@@ -72,9 +70,15 @@ export const CartContextProvider = ({ children }) => {
         }
     }
 
+    function countItemsInCart(){
+        let total = 0;
+        itemsInCart.forEach(item => { total += item.quantity });
+        return total;
+    }
+
     return(
         <>
-            <CartContext.Provider value={ {addItem, isInCart, removeItem, clearItems, itemsInCart} }>
+            <CartContext.Provider value={ {addItem, isInCart, removeItem, clearItems, countItemsInCart, itemsInCart} }>
                 {children}  
             </CartContext.Provider>
         </>

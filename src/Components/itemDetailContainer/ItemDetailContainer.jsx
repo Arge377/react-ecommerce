@@ -3,7 +3,8 @@ import ItemDetail from './ItemDetail';
 import {HarryPotter1, HarryPotter2, HarryPotter3, HarryPotter4, HarryPotter5, HarryPotter6, HarryPotter7} from '../../img/Books/HarryPotter';
 import {Narnia1, Narnia2, Narnia3, Narnia4, Narnia5, Narnia6, Narnia7} from '../../img/Books/Narnia';
 import {HungerGames1, HungerGames2, HungerGames3, HungerGames4} from '../../img/Books/HungerGames';
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
+import Loader from '../loader/Loader';
 
 
 const categories = {
@@ -216,7 +217,7 @@ const DbBooks = [
 function Get(id){
   return new Promise( (resolve) => { 
     setTimeout( () => { 
-      let book = DbBooks.find( (book) => {
+      let book = DbBooks.find((book) => {
         return book.id === id
       })
       resolve(book);
@@ -226,14 +227,16 @@ function Get(id){
 
 const ItemDetailContainer = () => {
   const { id } = useParams();
-  const [books, setItem] = useState([]);
+  const [books, setItem] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect( () => {
     let getBooks = Get(id);
 
     getBooks
       .then((books) => { 
-        setItem(books) 
+        setItem(books);
+        setIsLoading(false);
       })
       .catch( (error) => { 
         console.error(error) 
@@ -244,9 +247,11 @@ const ItemDetailContainer = () => {
 
   return (
     <>
-      <div className='row'>
-        <ItemDetail book={books}/>
-      </div>
+      {
+        isLoading
+        ? (<Loader/>)
+        : (<div className='row'><ItemDetail book={books}/></div>)
+      }
     </>
   )};
 
