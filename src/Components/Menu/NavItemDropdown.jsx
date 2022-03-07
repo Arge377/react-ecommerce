@@ -1,13 +1,24 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import { getAllCategories } from '../../service/firebase';
 
-const categories = {
-  infantil: 'Infantil',
-  fantasia: 'Fantasia',
-  accion: 'Accion'
-}
+
 
 const NavItemDropdown = ({NavName}) => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect( () => {
+    let getCategories = getAllCategories()
+
+    getCategories
+      .then( (categories) => {
+        setCategories(categories);
+      })
+      .catch( (error) => { console.error(error) });
+    },
+    []
+  );
+
   return (
     <>
         <li className="nav-item dropdown">
@@ -15,15 +26,11 @@ const NavItemDropdown = ({NavName}) => {
             {NavName}
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li>
-              <Link className="dropdown-item" to={`/categoria/${categories.fantasia}`}>{categories.fantasia}</Link>
-            </li>
-            <li>
-              <Link className="dropdown-item" to={`/categoria/${categories.infantil}`}>{categories.infantil}</Link>
-            </li>
-            <li>
-              <Link className="dropdown-item" to={`/categoria/${categories.accion}`}>{categories.accion}</Link>
-            </li>
+            {
+              categories.map(category => {
+                return <li key={category.id}><Link className="dropdown-item" to={`/categoria/${category.id}`}>{category.name}</Link></li>
+              })
+            }
           </ul>
         </li>
     </>
