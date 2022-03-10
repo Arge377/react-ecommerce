@@ -76,9 +76,21 @@ export const CartContextProvider = ({ children }) => {
         return total;
     }
 
+    function totalPrice(){
+        let totalPrice = 0;
+        itemsInCart.forEach(item => { totalPrice += item.price});
+        return totalPrice;
+    }
+
+    function getAllItemsInCart(){
+        let items = [];
+        itemsInCart.forEach(item => { items.push(item)});
+        return items;
+    }
+
     return(
         <>
-            <CartContext.Provider value={ {addItem, isInCart, removeItem, clearItems, countItemsInCart, itemsInCart} }>
+            <CartContext.Provider value={ {addItem, isInCart, removeItem, clearItems, countItemsInCart, totalPrice, getAllItemsInCart, itemsInCart} }>
                 {children}  
             </CartContext.Provider>
         </>

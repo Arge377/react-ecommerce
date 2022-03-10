@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, getDoc, doc, query, where } from "firebase/firestore";
+import { getFirestore, collection, getDocs, getDoc, doc, query, where, addDoc, updateDoc } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -73,5 +73,28 @@ export async function getBookById(id){
   } 
   catch (error) {
     
+  }
+}
+
+export async function generateOrder(orderData){
+  try {
+    const document = collection(db, "orders");
+    await addDoc(document, orderData);
+    orderData.items.forEach(i => { updateStock(i.id, i.quantity) });
+  } 
+  catch (error) {
+    console.log(error);
+  }
+}
+
+export async function updateStock(id, quantity){
+  try {
+    const document = doc(db, "books", id);
+    const book = await getDoc(document);
+    let newStock = book.data().stock - quantity;
+    await updateDoc(document, {stock: newStock});
+  } 
+  catch (error) {
+    console.log(error);
   }
 }

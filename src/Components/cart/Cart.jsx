@@ -1,6 +1,7 @@
 import React from 'react';
 import DataGrid, { Column, Button, Editing } from 'devextreme-react/data-grid';
 import useCartContext from '../../context/CartContext';
+import CartForm from './CartForm';
 
 const Cart = () => {
 
@@ -36,6 +37,9 @@ const Cart = () => {
             </Column>
           </DataGrid>
         </div>
+      </div>
+      <div className='row justify-content-center'>
+        <CartForm/>
       </div>
     </>
   )
