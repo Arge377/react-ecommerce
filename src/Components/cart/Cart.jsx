@@ -5,14 +5,10 @@ import CartForm from './CartForm';
 
 const Cart = () => {
 
-  const { itemsInCart, removeItem, clearItems } = useCartContext();
+  const { itemsInCart, removeItem } = useCartContext();
 
   function calculateTotalValue(item) {
     return `$${item.quantity * item.price}`;
-  }
-
-  function payment(item){
-    window.alert(`pagaste con exito ${item.name}`);
   }
 
   return (
@@ -31,9 +27,7 @@ const Cart = () => {
             <Column dataField="price" caption="Precio" dataType="number"/>
             <Column caption="Total" dataType="number" calculateCellValue={(e) => calculateTotalValue(e)}/>
             <Column caption="Acciones" type="buttons">
-              <Button cssClass="text-warning" icon="fa-solid fa-eraser" onClick={(e) => removeItem(e.row.data.id)}/>
-              <Button cssClass="text-danger" icon="fa-solid fa-trash-can" onClick={() => clearItems()}/>
-              <Button cssClass="text-success" icon="fa-solid fa-credit-card" onClick={(e) => payment(e.row.data)}/>
+              <Button cssClass="text-warning" icon="fa-solid fa-trash-can" onClick={(e) => removeItem(e.row.data.id)}/>
             </Column>
           </DataGrid>
         </div>

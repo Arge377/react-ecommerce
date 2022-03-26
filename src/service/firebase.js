@@ -72,15 +72,29 @@ export async function getBookById(id){
     return book;
   } 
   catch (error) {
-    
+    console.log(error);
   }
 }
 
 export async function generateOrder(orderData){
   try {
     const document = collection(db, "orders");
-    await addDoc(document, orderData);
+    const dbOrder = await addDoc(document, orderData);
+    const orderId = dbOrder.id;
     orderData.items.forEach(i => { updateStock(i.id, i.quantity) });
+    return orderId;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getOrderById(id){
+  try {
+    const document = doc(db, "orders", id);
+    const dbOrder = await getDoc(document);
+    const order = {...dbOrder.data(), id: dbOrder.id}
+    return order;
   } 
   catch (error) {
     console.log(error);

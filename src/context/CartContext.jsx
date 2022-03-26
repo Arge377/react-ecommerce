@@ -61,12 +61,14 @@ export const CartContextProvider = ({ children }) => {
                 if (willDelete){
                     setItemsInCart([]);
                     swal("se han eliminado todos los libros del carrito con exito", { icon: "success" });
-                    <Navigate to="/"/>
                 }
             });
         }
         else{
-            <Navigate to="/"/>
+            swal({
+                title: "No posee items en el carrito de compras!",
+                icon: "warning"
+            });
         }
     }
 
@@ -90,7 +92,7 @@ export const CartContextProvider = ({ children }) => {
 
     return(
         <>
-            <CartContext.Provider value={ {addItem, isInCart, removeItem, clearItems, countItemsInCart, totalPrice, getAllItemsInCart, itemsInCart} }>
+            <CartContext.Provider value={ {addItem, isInCart, removeItem, clearItems, countItemsInCart, totalPrice, getAllItemsInCart, itemsInCart, setItemsInCart} }>
                 {children}  
             </CartContext.Provider>
         </>

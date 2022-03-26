@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import useCartContext from '../../context/CartContext';
 import { generateOrder } from '../../service/firebase';
+import swal from 'sweetalert';
 
 const CartForm = () => {
-    const { totalPrice, getAllItemsInCart } = useCartContext();
-
+    const { totalPrice, getAllItemsInCart, clearItems, setItemsInCart } = useCartContext();
+    let navigate = useNavigate();
     const [form, setForm] = useState({
         buyer : {
             name: '',
@@ -30,7 +32,71 @@ const CartForm = () => {
         const date = Date();
         const orderData = { form, items, price, date };
 
-        generateOrder(orderData);
+        if(items.length >= 1){
+            if(validateForm(form.buyer)){
+                let orderId = generateOrder(orderData);
+                orderId.then((id) => {
+                    setItemsInCart([]);
+                    swal({
+                        title: "Su orden se ha generado con exito!",
+                        icon: "success"
+                    });
+                    navigate(`/detail/${id}`);
+                })
+            }
+        }
+        else{
+            swal({
+                title: "No posee libros en su carrito de compras!",
+                icon: "warning"
+            });
+        }
+    }
+
+    function validateForm(buyer){
+        const validEmail = new RegExp('^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$');
+        const validPhone = new RegExp(/^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/);
+        const validName = new RegExp(/^[a-zA-Z]+$/);
+
+        if(buyer.email === "" || buyer.name === "" || buyer.phone === ""){
+            swal({
+                title: "Los registros son Obligatorios!",
+                icon: "warning"
+            });
+            return false;
+        }
+
+        if(!validName.test(buyer.name)){
+            swal({
+                title: "El Nombre ingresado es invalido!",
+                icon: "warning"
+            });
+            return false;
+        }
+
+        if(!validEmail.test(buyer.email)){
+            swal({
+                title: "El Email ingresado es invalido!",
+                icon: "warning"
+            });
+            return false;
+        }
+
+        if(!validPhone.test(buyer.phone)){
+            swal({
+                title: "El Numero ingresado es invalido!",
+                icon: "warning"
+            });
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    function deleteItems(){
+        clearItems();
+        navigate("/");
     }
 
     return(
@@ -57,8 +123,9 @@ const CartForm = () => {
                     </div>
                 </div>
                 <div className="form-group row mt-4">
-                    <div className="col-sm-10">
+                    <div className="d-grid gap-2">
                         <button type="submit" className="btn btn-success" onClick={(e) => comprar(e)}>Comprar</button>
+                        <button type="button" className="btn btn-danger" onClick={() => deleteItems()}>Cancelar Compra</button>
                     </div>
                 </div>
             </form>
