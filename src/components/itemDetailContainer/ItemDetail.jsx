@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import useCartContext from '../../context/CartContext';
-import ItemCount from '../itemCount/ItemCount'
+import ItemCount from '../itemCount/ItemCount';
 
 const ItemDetail = ({book}) => {
 
